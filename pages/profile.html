@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Attic Lounges</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="../src/css/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="../src/css/style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Guest Header -->
+    <header class="guest sticky top-0 z-50 bg-white shadow-md">
+        <nav class="px-6 md:px-10 py-4 flex flex-wrap md:flex-nowrap justify-between items-center gap-4">
+            <!-- Logo -->
+            <img src="../src/img/Attic Lounges.png" alt="Attic Lounges" class="w-28 md:w-36 h-auto" />
+
+            <!-- Searchbar -->
+            <form class="flex-1 max-w-2xl w-full">
+                <div class="relative">
+                    <input type="search" id="product-search" placeholder="Cari produk preloved kamu..." class="block w-full rounded-full border border-gray-300 bg-gray-50 py-2.5 pl-10 pr-12 text-sm text-gray-900 focus:border-[#DC9C84] focus:ring-[#DC9C84] transition" required />
+                    <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none"><svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1116.65 16.65z" /></svg></div>
+                    <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-[#DC9C84] hover:bg-[#93392C] text-white text-sm font-medium rounded-full shadow-md transition">Search</button>
+                </div>
+            </form>
+
+            <!-- Menu -->
+            <div class="menu flex flex-row flex-wrap gap-4 items-center justify-center text-sm md:text-base">
+                <a href="../index.html" class="hover:text-[#DC9C84] transition">HOME</a>
+                <a href="product.html" class="hover:text-[#DC9C84] transition">PRODUCT</a>
+                <a href="../index.html#categories-section" class="hover:text-[#DC9C84] transition">CATEGORY</a>
+                <a href="chat.html" class="hover:text-[#DC9C84] transition">CHAT</a>
+                <a href="cart.html" class="relative"><img class="w-6 h-auto" src="https://cdn-icons-png.flaticon.com/128/1170/1170627.png" alt="cart"><span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span></a>
+                <button id="button-login" class="px-4 py-1.5 rounded-md text-sm font-medium border border-gray-300 hover:bg-gray-100 transition">LOGIN</button>
+                <button id="button-sign-up" class="px-4 py-1.5 rounded-md text-sm font-medium bg-[#DC9C84] hover:bg-[#93392C] text-white shadow-md transition">SIGN UP</button>
+                <button id="manage-products-btn" class="hidden px-4 py-1.5 rounded-md text-sm font-medium bg-purple-600 hover:bg-purple-700 text-white shadow-md transition">
+                    MANAGE PRODUCTS
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- User Header -->
+    <header class="user sticky top-0 z-50 bg-white shadow-md hidden">
+        <nav class="px-6 md:px-10 py-4 flex flex-wrap md:flex-nowrap justify-between items-center gap-4">
+            <img src="../src/img/Attic Lounges.png" alt="Attic Lounges" class="w-28 md:w-36 h-auto" />
+            <form class="flex-1 max-w-2xl w-full">
+                <div class="relative">
+                    <input type="search" id="product-search-user" placeholder="Cari produk preloved kamu..." class="block w-full rounded-full border border-gray-300 bg-gray-50 py-2.5 pl-10 pr-12 text-sm text-gray-900 focus:border-[#DC9C84] focus:ring-[#DC9C84] transition" required />
+                    <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none"><svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1116.65 16.65z" /></svg></div>
+                    <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-[#DC9C84] hover:bg-[#93392C] text-white text-sm font-medium rounded-full shadow-md transition">Search</button>
+                </div>
+            </form>
+            <div class="menu flex flex-row flex-wrap gap-4 items-center justify-center text-sm md:text-base">
+                <a href="../index.html" class="hover:text-[#DC9C84] transition">HOME</a>
+                <a href="product.html" class="hover:text-[#DC9C84] transition">PRODUCT</a>
+                <a href="../index.html#categories-section" class="hover:text-[#DC9C84] transition">CATEGORY</a>
+                <a href="cart.html" class="relative"><img class="w-6 h-auto" src="https://cdn-icons-png.flaticon.com/128/1170/1170627.png" alt="cart"><span id="cart-count-user" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                <button id="manage-products-btn-user" class="hidden px-4 py-1.5 rounded-md text-sm font-medium bg-purple-600 hover:bg-purple-700 text-white shadow-md transition">
+                    MANAGE PRODUCTS
+                </button></a>
+                <div class="relative group">
+                    <button id="my-account-btn" class="flex items-center gap-2 px-4 py-1.5 rounded-md text-sm font-medium border border-gray-300 hover:bg-gray-100 transition">
+                        <img src="https://cdn-icons-png.flaticon.com/128/1077/1077012.png" alt="User" class="w-5 h-5 rounded-full">
+                        <span>My Account</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="account-dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden">
+                        <a href="profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                        <a href="orders.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Orders</a>
+                        <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="min-h-screen py-8">
+        <div class="container mx-auto px-6">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8">My Profile</h1>
+            <div class="bg-white rounded-xl shadow-sm p-6 space-y-6">
+                <div class="flex items-center space-x-4">
+                    <img src="https://cdn-icons-png.flaticon.com/128/1077/1077012.png" alt="User Avatar" class="w-24 h-24 rounded-full object-cover border-2 border-[#DC9C84]">
+                    <div>
+                        <h2 id="profile-name" class="text-2xl font-bold text-gray-900">John Doe</h2>
+                        <p id="profile-email" class="text-gray-600">john.doe@example.com</p>
+                        <button class="mt-2 px-4 py-2 bg-[#DC9C84] text-white rounded-lg text-sm hover:bg-[#93392C] transition">Edit Profile</button>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Contact Information</h3>
+                        <p class="text-gray-700">Phone: <span id="profile-phone">N/A</span></p>
+                        <p class="text-gray-700">Address: <span id="profile-address">N/A</span></p>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Account Details</h3>
+                        <p class="text-gray-700">Member Since: <span id="member-since">N/A</span></p>
+                        <p class="text-gray-700">Total Orders: <span id="total-orders">0</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Login Modal -->
+    <div id="loginModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm p-8 relative">
+        
+            <!-- Tombol close -->
+            <button id="closeModal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">&times;</button>
+
+            <!-- Isi modal -->
+            <h2 class="text-2xl font-semibold mb-4 text-center">Masuk</h2>
+            
+            <!-- Toggle untuk User/Admin -->
+            <div class="flex mb-6 bg-gray-100 rounded-lg p-1">
+                <button id="user-login-tab" class="flex-1 py-2 px-4 text-sm font-medium rounded-md transition-colors bg-white text-gray-900 shadow-sm">
+                    User
+                </button>
+                <button id="admin-login-tab" class="flex-1 py-2 px-4 text-sm font-medium rounded-md transition-colors text-gray-500 hover:text-gray-700">
+                    Admin
+                </button>
+            </div>
+
+            <!-- User Login -->
+            <div id="user-login-content">
+                <p class="text-gray-600 mb-6 text-center">Gunakan akun Google Anda.</p>
+                <button id="google-login" class="flex items-center justify-center gap-3 px-6 py-3 rounded-lg font-medium transition-colors duration-200 border border-gray-300 hover:bg-gray-100 w-full">
+                    <img class="h-6 w-6" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo">
+                    <span>Masuk dengan Google</span>
+                </button>
+            </div>
+
+            <!-- Admin Login -->
+            <div id="admin-login-content" class="hidden">
+                <form id="admin-login-form" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email Admin</label>
+                        <input type="email" id="admin-email" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#DC9C84]"
+                               placeholder="owner@atticlounges.com">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <input type="password" id="admin-password" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#DC9C84]"
+                               placeholder="Masukkan password admin">
+                    </div>
+                    <button type="submit" class="w-full px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition">
+                        Masuk sebagai Admin
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm p-8 relative">
+        
+            <!-- Tombol close -->
+            <button id="closeSignupModal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">&times;</button>
+
+            <!-- Isi modal -->
+            <h2 class="text-2xl font-semibold mb-4 text-center">Daftar</h2>
+            <p class="text-gray-600 mb-6 text-center">Gunakan akun Google Anda.</p>
+            
+            <button id="google-signup" class="flex items-center justify-center gap-3 px-6 py-3 rounded-lg font-medium transition-colors duration-200 border border-gray-300 hover:bg-gray-100 w-full">
+                <img class="h-6 w-6" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google logo">
+                <span>Daftar dengan Google</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white text-gray-800 py-8 px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-3"><img src="../src/img/Attic Lounges.png" alt="logo" class="w-12 h-12 object-contain"><p class="text-sm">&copy; 2025 Attic Lounges. All rights reserved.</p></div>
+        <div class="social-media flex gap-6"><a href="#" class="hover:text-[#DC9C84] transition">Facebook</a><a href="#" class="hover:text-[#DC9C84] transition">Twitter</a><a href="#" class="hover:text-[#DC9C84] transition">Instagram</a></div>
+    </footer>
+
+    <script src="../src/js/app.js"></script>
+    <script src="../src/js/profile.js"></script>
+</body>
+</html>
+
+

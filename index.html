@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attic Lounges</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Passion+One:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="src/css/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
+
+<body>
+    
+    <!-- Guest Header -->
+    <header class="guest sticky top-0 z-50 bg-white shadow-md">
+        <nav class="px-6 md:px-10 py-4 flex flex-wrap md:flex-nowrap justify-between items-center gap-4">
+            <!-- Logo -->
+            <img src="src/img/Attic%20Lounges.png" alt="Attic Lounges" class="w-28 md:w-36 h-auto" />
+
+            <!-- Searchbar -->
+            <form class="flex-1 max-w-2xl w-full">
+                <div class="relative">
+                    <input 
+                    type="search" 
+                    id="default-search" 
+                    placeholder="Cari produk preloved kamu..." 
+                    class="block w-full rounded-full border border-gray-300 bg-gray-50 py-2.5 pl-10 pr-12 text-sm text-gray-900 focus:border-[#DC9C84] focus:ring-[#DC9C84] transition" 
+                    required
+                    />
+                    <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1116.65 16.65z" />
+                        </svg>
+                    </div>
+                    <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-[#DC9C84] hover:bg-[#93392C] text-white text-sm font-medium rounded-full shadow-md transition">
+                        Search
+                    </button>
+                </div>
+            </form>
+
+            <!-- Menu -->
+            <div class="menu flex flex-row flex-wrap gap-4 items-center justify-center text-sm md:text-base">
+                <a href="#hero-section" class="hover:text-[#DC9C84] transition">HOME</a>
+                <a href="pages/product.html" class="hover:text-[#DC9C84] transition">PRODUCT</a>
+                <a href="#categories-section" class="hover:text-[#DC9C84] transition">CATEGORY</a>
+                <a href="pages/cart.html" class="relative">
+                    <img class="w-6 h-auto" src="https://cdn-icons-png.flaticon.com/128/1170/1170627.png" alt="cart">
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                </a>
+                <button id="button-login" class="px-4 py-1.5 rounded-md text-sm font-medium border border-gray-300 hover:bg-gray-100 transition">
+                    LOGIN
+                </button>
+                <button id="button-sign-up" class="px-4 py-1.5 rounded-md text-sm font-medium bg-[#DC9C84] hover:bg-[#93392C] text-white shadow-md transition">
+                    SIGN UP
+                </button>
+                <button id="manage-products-btn" class="hidden px-4 py-1.5 rounded-md text-sm font-medium bg-purple-600 hover:bg-purple-700 text-white shadow-md transition">
+                    MANAGE PRODUCTS
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- User Header -->
+    <header class="user sticky top-0 z-50 bg-white shadow-md hidden">
+        <nav class="px-6 md:px-10 py-4 flex flex-wrap md:flex-nowrap justify-between items-center gap-4">
+            <!-- Logo -->
+            <img src="src/img/Attic%20Lounges.png" alt="Attic Lounges" class="w-28 md:w-36 h-auto" />
+
+            <!-- Searchbar -->
+            <form class="flex-1 max-w-2xl w-full">
+                <div class="relative">
+                    <input 
+                    type="search" 
+                    id="default-search-user" 
+                    placeholder="Cari produk preloved kamu..." 
+                    class="block w-full rounded-full border border-gray-300 bg-gray-50 py-2.5 pl-10 pr-12 text-sm text-gray-900 focus:border-[#DC9C84] focus:ring-[#DC9C84] transition" 
+                    required
+                    />
+                    <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1116.65 16.65z" />
+                        </svg>
+                    </div>
+                    <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 px-4 py-1.5 bg-[#DC9C84] hover:bg-[#93392C] text-white text-sm font-medium rounded-full shadow-md transition">
+                        Search
+                    </button>
+                </div>
+            </form>
+
+            <!-- Menu -->
+            <div class="menu flex flex-row flex-wrap gap-4 items-center justify-center text-sm md:text-base">
+                <a href="#hero-section" class="hover:text-[#DC9C84] transition">HOME</a>
+                <a href="pages/product.html" class="hover:text-[#DC9C84] transition">PRODUCT</a>
+                <a href="#categories-section" class="hover:text-[#DC9C84] transition">CATEGORY</a>
+                <a href="pages/cart.html" class="relative">
+                    <img class="w-6 h-auto" src="https://cdn-icons-png.flaticon.com/128/1170/1170627.png" alt="cart">
+                    <span id="cart-count-user" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+                </a>
+                <button id="manage-products-btn-user" class="hidden px-4 py-1.5 rounded-md text-sm font-medium bg-purple-600 hover:bg-purple-700 text-white shadow-md transition">
+                    MANAGE PRODUCTS
+                </button>
+                <div class="relative group">
+                    <button id="my-account-btn" class="flex items-center gap-2 px-4 py-1.5 rounded-md text-sm font-medium border border-gray-300 hover:bg-gray-100 transition">
+                        <img src="https://cdn-icons-png.flaticon.com/128/1077/1077012.png" alt="User" class="w-5 h-5 rounded-full">
+                        <span>My Account</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div id="account-dropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden">
+                        <a href="pages/profile.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                        <a href="pages/orders.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Orders</a>
+                        <button id="logout-btn" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div id="loginModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm p-8 relative">
+            
+                <!-- Tombol close -->
+                <button id="closeModal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">&times;</button>
+
+                <!-- Isi modal -->
+                <h2 class="text-2xl font-semibold mb-4 text-center">Masuk</h2>
+                
+                <!-- Toggle untuk User/Admin -->
+                <div class="flex mb-6 bg-gray-100 rounded-lg p-1">
+                    <button id="user-login-tab" class="flex-1 py-2 px-4 text-sm font-medium rounded-md transition-colors bg-white text-gray-900 shadow-sm">
+                        User
+                    </button>
+                    <button id="admin-login-tab" class="flex-1 py-2 px-4 text-sm font-medium rounded-md transition-colors text-gray-500 hover:text-gray-700">
+                        Admin
+                    </button>
+                </div>
+
+                <!-- User Login -->
+                <div id="user-login-content">
+                    <form id="user-login-form" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <input type="email" id="user-email" required 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#DC9C84]"
+                                   placeholder="Masukkan email">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                            <input type="password" id="user-password" required 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#DC9C84]"
+                                   placeholder="Masukkan password">
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3 bg-[#DC9C84] hover:bg-[#93392C] text-white rounded-lg font-medium transition">
+                            Masuk
+                        </button>
+                    </form>
+                    
+                    <div class="mt-4 text-center">
+                        <p class="text-sm text-gray-600">Belum punya akun? 
+                            <button id="switch-to-signup" class="text-[#DC9C84] hover:underline">Daftar di sini</button>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Admin Login -->
+                <div id="admin-login-content" class="hidden">
+                    <form id="admin-login-form" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Email Admin</label>
+                        <input type="email" id="admin-email" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#DC9C84]"
+                               placeholder="owner@atticlounges.com">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                            <input type="password" id="admin-password" required 
+                                   class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#DC9C84]"
+                                   placeholder="Masukkan password admin">
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition">
+                            Masuk sebagai Admin
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="signupModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm p-8 relative">
+            
+                <!-- Tombol close -->
+                <button id="closeSignupModal" class="absolute top-3 right-3 text-gray-500 hover:text-gray-700">&times;</button>
+
+                <!-- Isi modal -->
+                <h2 class="text-2xl font-semibold mb-4 text-center">Daftar Akun</h2>
+                
+                <!-- Form Registrasi -->
+                <form id="signup-form" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                        <input type="text" id="signup-name" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#DC9C84]"
+                               placeholder="Masukkan nama lengkap">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <input type="email" id="signup-email" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#DC9C84]"
+                               placeholder="Masukkan email">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <input type="password" id="signup-password" required 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#DC9C84]"
+                               placeholder="Masukkan password">
+                    </div>
+                    <button type="submit" class="w-full px-6 py-3 bg-[#DC9C84] hover:bg-[#93392C] text-white rounded-lg font-medium transition">
+                        Daftar Akun
+                    </button>
+                </form>
+                
+                <div class="mt-4 text-center">
+                    <p class="text-sm text-gray-600">Sudah punya akun? 
+                        <button id="switch-to-login" class="text-[#DC9C84] hover:underline">Masuk di sini</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    <!-- HERO SECTION -->
+        <section id="hero-section" class="relative">
+        <!-- Background image -->
+        <div class="hero-section flex flex-col justify-center items-center text-center gap-4 p-10 relative z-10 text-white">
+            <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <div class="flex flex-col justify-center items-center text-center gap-4 p-10 relative z-10 text-white">
+                    <h1 class="text-5xl">Discover Your Perfect Attic Lounge</h1>
+                    <p class="text-lg">Find the best attic lounges to relax and unwind</p>
+                    <button class="px-6 py-2 rounded-full bg-black text-white font-medium shadow-md hover:bg-[#DC9C84] transition duration-300" onclick="window.location.href='pages/product.html'">
+                    Explore Now
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overlay transparan -->
+        <div class="absolute inset-0 bg-black/50"></div>
+        </section>
+
+    <main>
+        <!-- Most Searched Products -->
+        <section class="most-searched py-16 px-5">
+            <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">Most Searched Products</h2>
+
+            <!-- Grid responsive -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                
+                <!-- Card 1 -->
+                <div class="group w-56 aspect-[1/1] relative overflow-hidden rounded-2xl shadow-xl transition-transform transform hover:scale-105 cursor-pointer" onclick="navigateToCategory('Fashion')">
+                    <img class="w-full h-full object-cover transition-transform transform" src="https://i.pinimg.com/1200x/c0/2b/dd/c02bddac3a2ad03ceec74b86dc0e7d3e.jpg" alt="Fashion">
+                    <a href="#" class="absolute inset-0 flex items-center justify-center no-underline">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 flex items-center justify-center group-hover:opacity-100">
+                            <span class="text-white text-2xl font-bold text-center transform translate-y-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                                Fashion
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group w-56 aspect-[1/1] relative overflow-hidden rounded-2xl shadow-xl transition-transform transform hover:scale-105 cursor-pointer" onclick="navigateToCategory('Accessories')">
+                    <img class="w-full h-full object-cover transition-transform transform" src="https://i.pinimg.com/1200x/22/c5/7b/22c57b231bfe81ec1802624fe152f7bb.jpg" alt="Accessories">
+                    <a href="#" class="absolute inset-0 flex items-center justify-center no-underline">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 flex items-center justify-center group-hover:opacity-100">
+                            <span class="text-white text-2xl font-bold text-center transform translate-y-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                                Accessories
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group w-56 aspect-[1/1] relative overflow-hidden rounded-2xl shadow-xl transition-transform transform hover:scale-105 cursor-pointer" onclick="navigateToCategory('Elektronik')">
+                    <img class="w-full h-full object-cover transition-transform transform" src="https://i.pinimg.com/1200x/61/2c/f8/612cf8de92a9ea8f813b9f0042102ee7.jpg" alt="Electronics">
+                    <a href="#" class="absolute inset-0 flex items-center justify-center no-underline">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 flex items-center justify-center group-hover:opacity-100">
+                            <span class="text-white text-2xl font-bold text-center transform translate-y-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                                Electronics
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="group w-56 aspect-[1/1] relative overflow-hidden rounded-2xl shadow-xl transition-transform transform hover:scale-105 cursor-pointer" onclick="navigateToCategory('Buku')">
+                    <img class="w-full h-full object-cover transition-transform transform" src="https://i.pinimg.com/736x/69/bb/b0/69bbb06902a057ca8d280f9f79f4594e.jpg" alt="Books">
+                    <a href="#" class="absolute inset-0 flex items-center justify-center no-underline">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 flex items-center justify-center group-hover:opacity-100">
+                            <span class="text-white text-2xl font-bold text-center transform translate-y-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                                Books
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="group w-56 aspect-[1/1] relative overflow-hidden rounded-2xl shadow-xl transition-transform transform hover:scale-105 cursor-pointer" onclick="navigateToCategory('Fashion')">
+                    <img class="w-full h-full object-cover transition-transform transform" src="https://i.pinimg.com/1200x/27/70/82/27708210401730b2fca2221086cc7d98.jpg" alt="Fashion">
+                    <a href="#" class="absolute inset-0 flex items-center justify-center no-underline">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 flex items-center justify-center group-hover:opacity-100">
+                            <span class="text-white text-2xl font-bold text-center transform translate-y-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                                Fashion
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="group w-56 aspect-[1/1] relative overflow-hidden rounded-2xl shadow-xl transition-transform transform hover:scale-105 cursor-pointer" onclick="navigateToCategory('Accessories')">
+                    <img class="w-full h-full object-cover transition-transform transform" src="https://i.pinimg.com/1200x/fc/3e/1d/fc3e1d20167f4de35e4709b1dce1656d.jpg" alt="Accessories">
+                    <a href="#" class="absolute inset-0 flex items-center justify-center no-underline">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 flex items-center justify-center group-hover:opacity-100">
+                            <span class="text-white text-2xl font-bold text-center transform translate-y-5 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+                                Accessories
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+
+        
+
+        <!-- Categories -->
+        <section id="categories-section" class="px-[10%] py-10 bg-white" id="categories">
+            <h2 class="text-center text-3xl font-semibold mb-8 pt-10 pb-10">Categories</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-10 w-full max-w-6xl mx-auto px-4">
+                <!-- Clothes -->
+                <div class="p-6 rounded-lg border bg-gray-50 hover:shadow-lg transition">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl">👕</span>
+                        <div>
+                            <h2 class="font-semibold">Clothes</h2>
+                            <p class="text-sm text-gray-600">458 Products Available</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ladies Bag -->
+                <div class="p-6 rounded-lg border border-black bg-white hover:shadow-lg transition">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl">👜</span>
+                        <div>
+                            <h2 class="font-semibold">Ladies Bag</h2>
+                            <p class="text-sm text-gray-600">144 Products Available</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shoes -->
+                <div class="p-6 rounded-lg border bg-gray-50 hover:shadow-lg transition">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl">👟</span>
+                        <div>
+                            <h2 class="font-semibold">Shoes</h2>
+                            <p class="text-sm text-gray-600">528 Products Available</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ornaments -->
+                <div class="p-6 rounded-lg border bg-gray-50 hover:shadow-lg transition">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl">💎</span>
+                        <div>
+                            <h2 class="font-semibold">Ornaments</h2>
+                            <p class="text-sm text-gray-600">759 Products Available</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Watches -->
+                <div class="p-6 rounded-lg border bg-gray-50 hover:shadow-lg transition">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl">⌚</span>
+                        <div>
+                            <h2 class="font-semibold">Watches</h2>
+                            <p class="text-sm text-gray-600">136 Products Available</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Phones -->
+                <div class="p-6 rounded-lg border bg-gray-50 hover:shadow-lg transition">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl">📱</span>
+                        <div>
+                            <h2 class="font-semibold">Smart Phones</h2>
+                            <p class="text-sm text-gray-600">167 Products Available</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Phones -->
+                <div class="p-6 rounded-lg border bg-gray-50 hover:shadow-lg transition">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl">📱</span>
+                        <div>
+                            <h2 class="font-semibold">Smart Phones</h2>
+                            <p class="text-sm text-gray-600">167 Products Available</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Phones -->
+                <div class="p-6 rounded-lg border bg-gray-50 hover:shadow-lg transition">
+                    <div class="flex items-center gap-3">
+                        <span class="text-4xl">📱</span>
+                        <div>
+                            <h2 class="font-semibold">Smart Phones</h2>
+                            <p class="text-sm text-gray-600">167 Products Available</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="flex justify-center mt-10">
+                <button class="px-6 py-2 rounded-lg bg-black text-white hover:bg-gray-800">
+                    Explore All Category
+                </button>
+            </div>
+        </section>
+
+
+
+
+        <!-- New Products -->
+        <section id="new-products" class="py-10 px-16 w-full">
+            <h2 class="text-2xl font-bold mb-6 text-center">New Products</h2>
+            
+            <!-- Grid -->
+            <div id="product-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 gap-10 max-w-7xl mx-auto"></div>
+        </section>
+
+                 
+
+        <!-- Testimoni / Reviews -->
+        <section id="testimoni-section" class="py-16 bg-gray-50">
+            <div class="container mx-auto max-w-6xl px-6">
+                <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">
+                    Ulasan Pembeli
+                </h2>
+
+                <!-- Carousel Wrapper -->
+                <div id="review-carousel" class="relative w-full">
+                    <div class="carousel overflow-hidden">
+                        <div id="review-slides" class="flex transition-transform duration-500">
+                            <!-- Dummy review (Slide 1) -->
+                            <div class="min-w-full md:min-w-1/3 px-4">
+                                <div class="bg-white p-6 rounded-2xl shadow-md">
+                                    <div class="flex items-center mb-4">
+                                        <img class="w-12 h-12 rounded-full mr-4 ring-2 ring-gray-200"
+                                            src="https://i.pinimg.com/736x/bb/c3/19/bbc319998168d69701701af51b6d2f1d.jpg"
+                                            alt="Avatar">
+                                        <div>
+                                            <p class="font-semibold text-gray-900">Syifa A.</p>
+                                            <p class="text-sm text-gray-500">Mahasiswa</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-700 italic mb-3">
+                                        “Barangnya real-pict. Kondisinya juga masih bagus. Bisa banget dipercaya!”
+                                    </p>
+                                    <div class="flex text-orange-400">
+                                        ★★★★★
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dummy review (Slide 2) -->
+                            <div class="min-w-full md:min-w-1/3 px-4">
+                                <div class="bg-white p-6 rounded-2xl shadow-md">
+                                    <div class="flex items-center mb-4">
+                                        <img class="w-12 h-12 rounded-full mr-4 ring-2 ring-gray-200" src="https://i.pinimg.com/736x/1d/8b/0e/1d8b0eea8fa3f6c8e505bba6aa8c1c13.jpg" alt="Avatar">
+                                        <div>
+                                            <p class="font-semibold text-gray-900">Jonathan</p>
+                                            <p class="text-sm text-gray-500">Freelancer</p>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-700 italic mb-3">
+                                        “Packing aman, barang sesuai deskripsi. Recomended seller 👍”
+                                    </p>
+                                    <div class="flex text-orange-400">
+                                        ★★★★☆
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Controls -->
+                    <button id="prev-btn" class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-md rounded-full p-2">
+                        ⬅
+                    </button>
+                    <button id="next-btn" class="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-md rounded-full p-2">
+                        ➡
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+
+    </main>
+
+    <footer class="bg-white text-[#1a1a1a] py-8 px-[10%] flex flex-col md:flex-row items-center justify-between gap-6">
+        <!-- Logo + text -->
+        <div class="flex items-center gap-3">
+            <img src="https://i.pinimg.com/1200x/2f/21/5b/2f215b7168faeed4201923fe8c8273cc.jpg" alt="logo" class="w-12 h-12 rounded-full object-cover">
+            <p class="text-sm">&copy; 2025 Atticlounges. All rights reserved.</p>
+        </div>
+
+        <!-- Social Media -->
+        <div class="social-media flex gap-6">
+            <a href="#" class="hover:text-white transition">Facebook</a>
+            <a href="#" class="hover:text-white transition">Twitter</a>
+            <a href="#" class="hover:text-white transition">Instagram</a>
+        </div>
+    </footer>
+
+    <script>
+        // Let the main app.js handle login status checking
+        console.log('Index.html loaded - login status will be checked by app.js');
+    </script>
+    <script src="src/js/data.js"></script>
+    <script src="src/js/app.js"></script>
+    <script src="src/js/product.js"></script>
+    <script src="src/js/review.js"></script>
+</body>
+</html>

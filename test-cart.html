@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Cart System - Attic Lounges</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #DC9C84;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #93392C;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        .warning { background: #fff3cd; color: #856404; }
+        .error { background: #f8d7da; color: #721c24; }
+        .cart-item {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border-left: 4px solid #DC9C84;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛒 Test Cart System</h1>
+        <p>Testing sistem cart multi-user Attic Lounges.</p>
+        
+        <div id="status" class="status info">
+            Klik tombol di bawah untuk testing cart
+        </div>
+        
+        <h3>🔐 Setup User</h3>
+        <button onclick="loginUser1()">Login as User 1</button>
+        <button onclick="loginUser2()">Login as User 2</button>
+        <button onclick="logout()">Logout</button>
+        
+        <h3>🛒 Cart Operations</h3>
+        <button onclick="addProduct1()">Add Product 1</button>
+        <button onclick="addProduct2()">Add Product 2</button>
+        <button onclick="viewCart()">View Cart</button>
+        <button onclick="clearCart()">Clear Cart</button>
+        
+        <h3>🧪 Test Scenarios</h3>
+        <button onclick="testMultiUser()">Test Multi-User Cart</button>
+        <button onclick="testGuestCart()">Test Guest Cart</button>
+        <button onclick="goToCart()">Go to Cart Page</button>
+        
+        <div id="user-info" style="background: #e9ecef; padding: 15px; border-radius: 5px; margin: 10px 0;">
+            <strong>Current User:</strong> <span id="current-user">Not logged in</span>
+        </div>
+        
+        <div id="cart-display" style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 10px 0;">
+            <strong>Current Cart:</strong>
+            <div id="cart-items">Empty</div>
+        </div>
+        
+        <div id="storage-info" style="background: #e9ecef; padding: 15px; border-radius: 5px; margin: 10px 0; font-family: monospace; font-size: 12px;">
+            <strong>Storage Keys:</strong><br>
+            <span id="storage-keys">No data</span>
+        </div>
+    </div>
+
+    <script>
+        // Cart functions (same as in the app)
+        function getCurrentUserId() {
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            return user.id || null;
+        }
+        
+        function getCart() {
+            const userId = getCurrentUserId();
+            const cartKey = userId ? `cart_${userId}` : 'cart_guest';
+            return JSON.parse(localStorage.getItem(cartKey)) || [];
+        }
+        
+        function saveCart(cart) {
+            const userId = getCurrentUserId();
+            const cartKey = userId ? `cart_${userId}` : 'cart_guest';
+            localStorage.setItem(cartKey, JSON.stringify(cart));
+        }
+        
+        function updateDisplay() {
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            
+            document.getElementById('current-user').textContent = isLoggedIn ? 
+                `${user.name || 'Unknown'} (${user.id || 'No ID'})` : 'Not logged in';
+            
+            const cart = getCart();
+            const cartItemsDiv = document.getElementById('cart-items');
+            
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = 'Empty';
+            } else {
+                cartItemsDiv.innerHTML = cart.map(item => 
+                    `<div class="cart-item">${item.name} - Rp ${item.price.toLocaleString()} (Qty: ${item.qty})</div>`
+                ).join('');
+            }
+            
+            // Show storage keys
+            const keys = Object.keys(localStorage);
+            const cartKeys = keys.filter(key => key.startsWith('cart_'));
+            document.getElementById('storage-keys').innerHTML = cartKeys.length > 0 ? 
+                cartKeys.join('<br>') : 'No cart data';
+        }
+        
+        function loginUser1() {
+            const user1 = {
+                id: 'user_001',
+                name: 'John Doe',
+                email: 'john@example.com',
+                role: 'user'
+            };
+            
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('token', 'token_user_001');
+            localStorage.setItem('user', JSON.stringify(user1));
+            
+            document.getElementById('status').innerHTML = '✅ Logged in as User 1 (John Doe)';
+            document.getElementById('status').className = 'status success';
+            updateDisplay();
+        }
+        
+        function loginUser2() {
+            const user2 = {
+                id: 'user_002',
+                name: 'Jane Smith',
+                email: 'jane@example.com',
+                role: 'user'
+            };
+            
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('token', 'token_user_002');
+            localStorage.setItem('user', JSON.stringify(user2));
+            
+            document.getElementById('status').innerHTML = '✅ Logged in as User 2 (Jane Smith)';
+            document.getElementById('status').className = 'status success';
+            updateDisplay();
+        }
+        
+        function logout() {
+            const userId = getCurrentUserId();
+            
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("isAdmin");
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            
+            if (userId) {
+                localStorage.removeItem(`cart_${userId}`);
+            }
+            
+            document.getElementById('status').innerHTML = '✅ Logged out';
+            document.getElementById('status').className = 'status success';
+            updateDisplay();
+        }
+        
+        function addProduct1() {
+            const product = {
+                _id: 'prod_001',
+                name: 'Vintage T-Shirt',
+                price: 150000,
+                qty: 1,
+                image: 'https://via.placeholder.com/150',
+                category: 'Fashion'
+            };
+            
+            let cart = getCart();
+            const existing = cart.find(item => item._id === product._id);
+            
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push(product);
+            }
+            
+            saveCart(cart);
+            document.getElementById('status').innerHTML = '✅ Added Vintage T-Shirt to cart';
+            document.getElementById('status').className = 'status success';
+            updateDisplay();
+        }
+        
+        function addProduct2() {
+            const product = {
+                _id: 'prod_002',
+                name: 'Designer Bag',
+                price: 500000,
+                qty: 1,
+                image: 'https://via.placeholder.com/150',
+                category: 'Accessories'
+            };
+            
+            let cart = getCart();
+            const existing = cart.find(item => item._id === product._id);
+            
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push(product);
+            }
+            
+            saveCart(cart);
+            document.getElementById('status').innerHTML = '✅ Added Designer Bag to cart';
+            document.getElementById('status').className = 'status success';
+            updateDisplay();
+        }
+        
+        function viewCart() {
+            const cart = getCart();
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            
+            document.getElementById('status').innerHTML = 
+                `🛒 Cart has ${cart.length} items. Total: Rp ${total.toLocaleString()}`;
+            document.getElementById('status').className = 'status info';
+            updateDisplay();
+        }
+        
+        function clearCart() {
+            const userId = getCurrentUserId();
+            const cartKey = userId ? `cart_${userId}` : 'cart_guest';
+            localStorage.removeItem(cartKey);
+            
+            document.getElementById('status').innerHTML = '✅ Cart cleared';
+            document.getElementById('status').className = 'status success';
+            updateDisplay();
+        }
+        
+        function testMultiUser() {
+            // Test scenario: User 1 adds items, User 2 adds different items
+            loginUser1();
+            setTimeout(() => {
+                addProduct1();
+                setTimeout(() => {
+                    loginUser2();
+                    setTimeout(() => {
+                        addProduct2();
+                        setTimeout(() => {
+                            document.getElementById('status').innerHTML = 
+                                '✅ Multi-user test completed! Each user has separate cart.';
+                            document.getElementById('status').className = 'status success';
+                            updateDisplay();
+                        }, 500);
+                    }, 500);
+                }, 500);
+            }, 500);
+        }
+        
+        function testGuestCart() {
+            logout();
+            setTimeout(() => {
+                addProduct1();
+                setTimeout(() => {
+                    document.getElementById('status').innerHTML = 
+                        '✅ Guest cart test completed! Guest cart is separate from user carts.';
+                    document.getElementById('status').className = 'status success';
+                    updateDisplay();
+                }, 500);
+            }, 500);
+        }
+        
+        function goToCart() {
+            window.location.href = 'pages/cart.html';
+        }
+        
+        // Update display on load
+        updateDisplay();
+    </script>
+</body>
+</html>

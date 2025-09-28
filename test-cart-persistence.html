@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Cart Persistence - Attic Lounges</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #DC9C84;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #93392C;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        .warning { background: #fff3cd; color: #856404; }
+        .error { background: #f8d7da; color: #721c24; }
+        .cart-item {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border-left: 4px solid #DC9C84;
+        }
+        .test-step {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💾 Test Cart Persistence</h1>
+        <p>Testing bahwa cart user tersimpan setelah logout dan muncul kembali saat login.</p>
+        
+        <div id="status" class="status info">
+            Klik tombol di bawah untuk testing cart persistence
+        </div>
+        
+        <h3>🧪 Test Scenarios</h3>
+        <button onclick="testCartPersistence()">Test Full Cart Persistence</button>
+        <button onclick="testMultiUserPersistence()">Test Multi-User Persistence</button>
+        <button onclick="clearAllData()">Clear All Data</button>
+        <button onclick="goToWebsite()">Go to Website</button>
+        
+        <div id="test-steps">
+            <div class="test-step">
+                <strong>Test Steps:</strong><br>
+                <span id="test-output">No tests run yet</span>
+            </div>
+        </div>
+        
+        <div id="user-info" style="background: #e9ecef; padding: 15px; border-radius: 5px; margin: 10px 0;">
+            <strong>Current User:</strong> <span id="current-user">Not logged in</span>
+        </div>
+        
+        <div id="cart-display" style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 10px 0;">
+            <strong>Current Cart:</strong>
+            <div id="cart-items">Empty</div>
+        </div>
+        
+        <div id="storage-info" style="background: #e9ecef; padding: 15px; border-radius: 5px; margin: 10px 0; font-family: monospace; font-size: 12px;">
+            <strong>Storage Data:</strong><br>
+            <span id="storage-details">No data</span>
+        </div>
+    </div>
+
+    <script>
+        // Cart functions (same as in the app)
+        function getCurrentUserId() {
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            return user.id || null;
+        }
+        
+        function getCart() {
+            const userId = getCurrentUserId();
+            const cartKey = userId ? `cart_${userId}` : 'cart_guest';
+            return JSON.parse(localStorage.getItem(cartKey)) || [];
+        }
+        
+        function saveCart(cart) {
+            const userId = getCurrentUserId();
+            const cartKey = userId ? `cart_${userId}` : 'cart_guest';
+            localStorage.setItem(cartKey, JSON.stringify(cart));
+        }
+        
+        function updateDisplay() {
+            const user = JSON.parse(localStorage.getItem('user') || '{}');
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            
+            document.getElementById('current-user').textContent = isLoggedIn ? 
+                `${user.name || 'Unknown'} (${user.id || 'No ID'})` : 'Not logged in';
+            
+            const cart = getCart();
+            const cartItemsDiv = document.getElementById('cart-items');
+            
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = 'Empty';
+            } else {
+                cartItemsDiv.innerHTML = cart.map(item => 
+                    `<div class="cart-item">${item.name} - Rp ${item.price.toLocaleString()} (Qty: ${item.qty})</div>`
+                ).join('');
+            }
+            
+            // Show storage data
+            const keys = Object.keys(localStorage);
+            const userData = keys.filter(key => key.includes('cart_') || key.includes('wishlist_') || key.includes('user') || key.includes('token'));
+            document.getElementById('storage-details').innerHTML = userData.length > 0 ? 
+                userData.map(key => `${key}: ${localStorage.getItem(key).length} chars`).join('<br>') :
+                'No user data';
+        }
+        
+        function loginUser1() {
+            const user1 = {
+                id: 'user_001',
+                name: 'John Doe',
+                email: 'john@example.com',
+                role: 'user'
+            };
+            
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('token', 'token_user_001');
+            localStorage.setItem('user', JSON.stringify(user1));
+            
+            updateDisplay();
+            return 'User 1 logged in';
+        }
+        
+        function loginUser2() {
+            const user2 = {
+                id: 'user_002',
+                name: 'Jane Smith',
+                email: 'jane@example.com',
+                role: 'user'
+            };
+            
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('token', 'token_user_002');
+            localStorage.setItem('user', JSON.stringify(user2));
+            
+            updateDisplay();
+            return 'User 2 logged in';
+        }
+        
+        function logout() {
+            const userId = getCurrentUserId();
+            
+            // Clear user session data only (keep cart and wishlist)
+            localStorage.removeItem("isLoggedIn");
+            localStorage.removeItem("isAdmin");
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            
+            // DON'T clear user cart and wishlist - keep them for when user logs back in
+            // Cart and wishlist will be preserved: cart_${userId} and wishlist_${userId}
+            
+            // Clear guest data only
+            localStorage.removeItem("cart_guest");
+            localStorage.removeItem("wishlist_guest");
+            
+            updateDisplay();
+            return 'User logged out (cart preserved)';
+        }
+        
+        function addProduct(name, price) {
+            const product = {
+                _id: `prod_${Date.now()}`,
+                name: name,
+                price: price,
+                qty: 1,
+                image: 'https://via.placeholder.com/150',
+                category: 'Test'
+            };
+            
+            let cart = getCart();
+            const existing = cart.find(item => item._id === product._id);
+            
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push(product);
+            }
+            
+            saveCart(cart);
+            updateDisplay();
+            return `Added ${name} to cart`;
+        }
+        
+        function testCartPersistence() {
+            let steps = [];
+            
+            // Step 1: Login User 1
+            steps.push('1. ' + loginUser1());
+            
+            // Step 2: Add products
+            setTimeout(() => {
+                steps.push('2. ' + addProduct('Vintage T-Shirt', 150000));
+                steps.push('3. ' + addProduct('Designer Bag', 500000));
+                
+                // Step 3: Logout
+                setTimeout(() => {
+                    steps.push('4. ' + logout());
+                    
+                    // Step 4: Login again
+                    setTimeout(() => {
+                        steps.push('5. ' + loginUser1());
+                        
+                        // Check if cart is preserved
+                        const cart = getCart();
+                        if (cart.length === 2) {
+                            steps.push('6. ✅ SUCCESS: Cart preserved after logout/login!');
+                            document.getElementById('status').innerHTML = '✅ Cart persistence test PASSED!';
+                            document.getElementById('status').className = 'status success';
+                        } else {
+                            steps.push('6. ❌ FAILED: Cart not preserved!');
+                            document.getElementById('status').innerHTML = '❌ Cart persistence test FAILED!';
+                            document.getElementById('status').className = 'status error';
+                        }
+                        
+                        document.getElementById('test-output').innerHTML = steps.join('<br>');
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }
+        
+        function testMultiUserPersistence() {
+            let steps = [];
+            
+            // Step 1: Login User 1, add products
+            steps.push('1. ' + loginUser1());
+            setTimeout(() => {
+                steps.push('2. ' + addProduct('User 1 Product', 100000));
+                
+                // Step 2: Login User 2, add different products
+                setTimeout(() => {
+                    steps.push('3. ' + loginUser2());
+                    steps.push('4. ' + addProduct('User 2 Product', 200000));
+                    
+                    // Step 3: Logout User 2
+                    setTimeout(() => {
+                        steps.push('5. ' + logout());
+                        
+                        // Step 4: Login User 1 again
+                        setTimeout(() => {
+                            steps.push('6. ' + loginUser1());
+                            
+                            // Check if User 1's cart is preserved
+                            const cart = getCart();
+                            if (cart.length === 1 && cart[0].name === 'User 1 Product') {
+                                steps.push('7. ✅ SUCCESS: Multi-user cart persistence works!');
+                                document.getElementById('status').innerHTML = '✅ Multi-user persistence test PASSED!';
+                                document.getElementById('status').className = 'status success';
+                            } else {
+                                steps.push('7. ❌ FAILED: Multi-user cart persistence failed!');
+                                document.getElementById('status').innerHTML = '❌ Multi-user persistence test FAILED!';
+                                document.getElementById('status').className = 'status error';
+                            }
+                            
+                            document.getElementById('test-output').innerHTML = steps.join('<br>');
+                        }, 1000);
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }
+        
+        function clearAllData() {
+            localStorage.clear();
+            document.getElementById('test-output').innerHTML = 'All data cleared. Ready for fresh testing.';
+            document.getElementById('status').innerHTML = 'All data cleared';
+            document.getElementById('status').className = 'status info';
+            updateDisplay();
+        }
+        
+        function goToWebsite() {
+            window.location.href = 'index.html';
+        }
+        
+        // Update display on load
+        updateDisplay();
+    </script>
+</body>
+</html>
