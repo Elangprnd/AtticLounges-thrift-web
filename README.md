@@ -1,3 +1,7 @@
+# 🚧 Still in Progress  
+
+This project is currently under development. Some features may not be fully stable or completed.  
+
 # Attic Lounges - Thrift Store Website
 
 Website thrift store dengan sistem **owner-only product management**. Hanya owner yang bisa menambah, mengedit, dan menghapus produk, sementara user biasa hanya bisa melihat dan membeli.
